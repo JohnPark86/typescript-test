@@ -6,16 +6,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
-	entry: path.resolve(__dirname, 'src', 'index'),
+	entry: path.resolve(__dirname, 'src', 'index.tsx'),
 	output: {
 		filename: 'index.bundle.js',
-		path: path.join(__dirname, 'dist')
+		path: path.join(__dirname, 'dist'),
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: 'tstest',
-			template: './src/index.html'
-		})
+			template: './src/index.html',
+		}),
 	],
 	module: {
 		rules: [
@@ -23,9 +23,9 @@ module.exports = {
 				test: /\.js|.jsx$/,
 				exclude: /node_modules/,
 				resolve: {
-					extensions: ['.js', '.jsx']
+					extensions: ['.js', '.jsx'],
 				},
-				loader: 'babel-loader'
+				loader: 'babel-loader',
 			},
 			{
 				test: /\.s[ac]ss|.css$/i,
@@ -35,9 +35,14 @@ module.exports = {
 					// Translates CSS into CommonJS
 					'css-loader',
 					// Compiles Sass to CSS
-					'sass-loader'
-				]
-			}
-		]
+
+					'sass-loader',
+				],
+			},
+			{ test: /\.tsx?$/, use: ['ts-loader'] },
+		],
+	},
+	resolve : {
+		extensions: [".ts", ".tsx", ".json", ".js"]
 	}
 };
