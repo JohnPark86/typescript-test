@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { Input } from './input';
 import { Button } from './button';
 
-// type Props = {
-// 	userName: string;
-// 	lang: string;
-// };
+const Container = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 5em;
+`;
 
 const App: React.FC = () => {
 	const [data, setData] = useState('');
@@ -13,25 +16,23 @@ const App: React.FC = () => {
 	useEffect(() => {});
 
 	const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		console.log(e);
+		setData(e.currentTarget.value);
 	};
 
-	const onClick = (e: any): void => {
-		console.log(e);
+	const onClick = (): void => {
 		fetchData(data);
 	};
 
 	const fetchData = (data: string): void => {
 		console.log(data);
-		setData(data)
+		setData(data);
 	};
 
 	return (
-		<div>
-			<h1>Search</h1>
-			<Input onChange={updateInput} />
+		<Container>
+			<Input onChange={updateInput} value={data} />
 			<Button onClick={onClick} />
-		</div>
+		</Container>
 	);
 };
 

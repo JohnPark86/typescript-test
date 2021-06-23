@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import styled from 'styled-components';
+
+const StyledInput = styled.input`
+	height: 2.5em;
+	border-radius: 10px;
+	border: 2px solid limegreen;
+	width: 25em;
+`;
 
 type InputProps = {
-	onChange: (e: React.ChangeEvent<HTMLInputElement> ) => void;
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input: React.FC<InputProps> = ({ onChange }) => {
-	const [value, setValue] = useState('');
-	useEffect(() => {});
-
-	const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) : void => {
-		let val = e.currentTarget.value;
-		setValue(val);
+const Input: React.FC<InputProps> = ({ value, onChange }) => {
+	const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
+		e
+	): void => {
 		onChange(e);
 	};
 
 	return (
 		<div>
-			<input type='text' value={value} onChange={onChangeHandler} />
+			<StyledInput type='text' value={value} onChange={onChangeHandler} />
 		</div>
 	);
 };
